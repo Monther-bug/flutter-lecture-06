@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Lecture 06 · Icons, Images & Assets</title>
-  <meta name="description" content="Mobile App Development with Flutter, Lecture 06: Icon, Image.network, assets, BoxFit, CircleAvatar, ClipRRect and SVG.">
+  <title>Lecture 06 · Images, Assets & SVG</title>
+  <meta name="description" content="Mobile App Development with Flutter, Lecture 06: Image.network, assets, Image.asset, BoxFit, and SVG pictures with the flutter_svg package.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Sora:wght@600;700&amp;display=swap" rel="stylesheet">
@@ -66,6 +66,31 @@
   <symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
 </svg>
 
+<!-- The Phantom Troupe spider (same drawing as assets/svg/phantom_spider.svg), copied into every [data-spider] -->
+<template id="spider-tpl">
+  <svg class="spider" viewBox="0 0 240 230" aria-hidden="true">
+    <g class="spider__legs" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+      <path pathLength="1" style="--k:0" d="M112 104 L114.8 58.1 L77 45"/>
+      <path pathLength="1" style="--k:0" d="M128 104 L125.2 58.1 L163 45"/>
+      <path pathLength="1" style="--k:1" d="M112 109 L93 60.6 L53.2 64.8"/>
+      <path pathLength="1" style="--k:1" d="M128 109 L147 60.6 L186.8 64.8"/>
+      <path pathLength="1" style="--k:2" d="M112 114 L74.3 78.2 L33.1 102.9"/>
+      <path pathLength="1" style="--k:2" d="M128 114 L165.7 78.2 L206.9 102.9"/>
+      <path pathLength="1" style="--k:3" d="M112 119 L68.4 104.4 L41.5 144.2"/>
+      <path pathLength="1" style="--k:3" d="M128 119 L171.6 104.4 L198.5 144.2"/>
+      <path pathLength="1" style="--k:4" d="M112 124 L66.3 129.2 L60 168.7"/>
+      <path pathLength="1" style="--k:4" d="M128 124 L173.7 129.2 L180 168.7"/>
+      <path pathLength="1" style="--k:5" d="M112 129 L72.8 153 L83.8 191.5"/>
+      <path pathLength="1" style="--k:5" d="M128 129 L167.2 153 L156.2 191.5"/>
+    </g>
+    <g class="spider__body" fill="currentColor">
+      <circle cx="120" cy="94" r="15"/>
+      <ellipse cx="120" cy="140" rx="24" ry="33"/>
+    </g>
+    <ellipse class="spider__mark" cx="120" cy="134" rx="9" ry="14"/>
+  </svg>
+</template>
+
 <div class="progress" aria-hidden="true"><span></span></div>
 
 <main class="deck">
@@ -75,31 +100,32 @@
   <div class="canvas"><div class="frame frame--title">
     <div class="stagger">
       <p class="kicker">Lecture 06 · Mobile App Development</p>
-      <h1 class="hero">Icons, Images<br>&amp; <span class="grad-text">Assets</span></h1>
-      <p class="lead lead--hero">Make your app look real: icons, photos from the internet and your own pictures.</p>
+      <h1 class="hero">Images, Assets<br>&amp; <span class="grad-text shine">SVG</span></h1>
+      <p class="lead lead--hero">Make your app look real: pictures from the internet, pictures inside your app, and sharp SVG drawings.</p>
       <div class="chips">
-        <span class="chip"><span class="avatar">MI</span>Eng. Monther Ibrahim</span>
+        <span class="chip"><span class="avatar">MI</span>Monther Ibrahim</span>
         <span class="chip"><span class="avatar">M</span>Muhammad, M.Sc.</span>
         <span class="chip">Fall 2026</span>
       </div>
       <p class="keys"><kbd>→</kbd> next &nbsp;·&nbsp; <kbd>F</kbd> fullscreen &nbsp;·&nbsp; <kbd>N</kbd> notes &nbsp;·&nbsp; <kbd>T</kbd> theme</p>
     </div>
-    <div class="title-right" aria-hidden="true" style="display:grid; place-items:center;">
-      <div class="logo-glow" style="left:12%; top:10%;"></div>
-      <div class="ph" style="--pw:15.5cqw;">
-        <div class="ph__scr"><div class="ph__island"></div>
-          <div class="appbar" style="--ab:#2196F3; --abf:#fff;">Profile</div>
-          <div class="col" style="align-items:center; padding-top:1.6em;">
-            <div class="m-avatar scenic"></div>
-            <div class="m-title" style="font-size:1.25em;">Ahmed Ali</div>
-            <div class="rowx" style="gap:1.4em; --ic:#2196F3;"><svg class="ico ico-m"><use href="#i-phone"/></svg><svg class="ico ico-m"><use href="#i-mail"/></svg><svg class="ico ico-m"><use href="#i-map-pin"/></svg></div>
-            <div class="scenic" style="width:100%; height:6.5em; border-radius:.8em; margin-top:.6em;"></div>
-          </div>
-        </div>
+    <div class="title-right gallery" aria-hidden="true">
+      <div class="logo-glow" style="left:14%; top:12%;"></div>
+      <div class="pic-wrap" style="--x:0cqw; --y:7cqw; --w:12cqw; --d:250ms;">
+        <div class="pic" style="--r:-9deg; --fd:-1s;"><img src="https://cdn.myanimelist.net/images/characters/15/582919.jpg" alt="" referrerpolicy="no-referrer"><span class="pic__tag">Image.asset</span></div>
+      </div>
+      <div class="pic-wrap" style="--x:21cqw; --y:9cqw; --w:12cqw; --d:400ms;">
+        <div class="pic" style="--r:8deg; --fd:-3s;"><img src="https://cdn.myanimelist.net/images/characters/8/492868.jpg" alt="" referrerpolicy="no-referrer"><span class="pic__tag">Image.asset</span></div>
+      </div>
+      <div class="pic-wrap" style="--x:9.5cqw; --y:1cqw; --w:14.5cqw; --d:100ms; z-index:2;">
+        <div class="pic" style="--r:-1deg; --fd:-2s;"><img src="https://cdn.myanimelist.net/images/characters/5/186355.jpg" alt="" referrerpolicy="no-referrer"><span class="pic__tag pic__tag--net">Image.network</span></div>
+      </div>
+      <div class="pic-wrap" style="--x:23cqw; --y:30cqw; --w:10cqw; --d:650ms; z-index:3;">
+        <div class="svg-bubble"><span class="spider-host spider--draw" data-spider></span><span class="pic__tag pic__tag--svg">SvgPicture</span></div>
       </div>
     </div>
   </div></div>
-  <aside class="notes"><p>Ask students to bring a photo of themselves (or any picture) on their laptop. We'll put it in the app today.</p></aside>
+  <aside class="notes"><p>Today every picture is <b>Chrollo Lucilfer</b>, the leader of the Phantom Troupe in Hunter x Hunter. Share the <b>lecture-06-chrollo</b> folder (3 pictures + the spider SVG) before class so everyone has the same files.</p></aside>
 </section>
 
 <!-- 02 · Today -->
@@ -111,121 +137,102 @@
       <p class="lead">Text and boxes are nice. Pictures make an app feel <b>real</b>.</p>
     </header>
     <div class="body" style="grid-template-rows: 1fr auto;">
-      <div class="journey stagger">
-        <div class="stop"><div class="stop__dot"><svg class="ico"><use href="#i-star"/></svg><span class="stop__n">1</span></div><h3>Icon</h3><p>ready-made symbols</p></div>
-        <div class="stop"><div class="stop__dot"><svg class="ico"><use href="#i-wifi"/></svg><span class="stop__n">2</span></div><h3>Image.network</h3><p>pictures from the internet</p></div>
-        <div class="stop"><div class="stop__dot"><svg class="ico"><use href="#i-folder"/></svg><span class="stop__n">3</span></div><h3>Assets</h3><p>your own pictures</p></div>
-        <div class="stop"><div class="stop__dot"><svg class="ico"><use href="#i-image"/></svg><span class="stop__n">4</span></div><h3>Round images</h3><p>CircleAvatar &amp; ClipRRect</p></div>
-        <div class="stop"><div class="stop__dot"><svg class="ico"><use href="#i-user"/></svg><span class="stop__n">5</span></div><h3>Build it</h3><p>a profile header</p></div>
+      <div class="journey journey--grow stagger">
+        <div class="stop"><div class="stop__dot"><svg class="ico"><use href="#i-wifi"/></svg><span class="stop__n">1</span></div><h3>Image.network</h3><p>a picture from the internet</p></div>
+        <div class="stop"><div class="stop__dot"><svg class="ico"><use href="#i-folder"/></svg><span class="stop__n">2</span></div><h3>Assets</h3><p>pictures inside your app</p></div>
+        <div class="stop"><div class="stop__dot"><svg class="ico"><use href="#i-image"/></svg><span class="stop__n">3</span></div><h3>BoxFit</h3><p>how a picture fills its box</p></div>
+        <div class="stop"><div class="stop__dot"><svg class="ico"><use href="#i-package"/></svg><span class="stop__n">4</span></div><h3>SVG</h3><p>sharp drawings + a package</p></div>
+        <div class="stop"><div class="stop__dot"><svg class="ico"><use href="#i-phone"/></svg><span class="stop__n">5</span></div><h3>Build it</h3><p>a Chrollo character card</p></div>
       </div>
-      <div class="callout callout--ok goal"><svg class="ico"><use href="#i-target"/></svg><div><b>Goal:</b> show your own photo in a circle, with your name and three icons under it.</div></div>
+      <div class="callout callout--ok goal"><svg class="ico"><use href="#i-target"/></svg><div><b>Goal:</b> one screen with Chrollo from the internet, three Chrollo pictures from your assets and the Phantom Troupe spider as an SVG.</div></div>
     </div>
     <footer class="foot"><span>Mobile App Development · Lecture 06</span><span class="num"></span></footer>
   </div></div>
-  <aside class="notes"><p>Quick revision question: what's the difference between child and children? (One widget vs a list.)</p></aside>
+  <aside class="notes"><p>Quick revision from lecture 5: what does Expanded do inside a Row? (It takes the free space.) We use it again at the end today.</p></aside>
 </section>
 
-<!-- 03 · Icon -->
+<!-- 03 · Image.network -->
 <section class="slide">
   <div class="canvas"><div class="frame">
     <header class="head">
-      <p class="kicker">Widget 1 · Icon</p>
-      <h2 class="title"><code>Icon</code>: thousands of free symbols</h2>
+      <p class="kicker">Way 1 · Image.network</p>
+      <h2 class="title">Show a picture from the internet</h2>
     </header>
-    <div class="body walk">
+    <div class="body" style="grid-template-columns: 1fr auto; gap: 3cqw; align-items: start;">
       <div class="side">
         <div class="term code code--lg">
           <div class="term__bar"><i></i><i></i><i></i><span>lib/main.dart</span></div>
-<pre class="hl">Icon(
-  Icons.favorite,
-  color: Colors.red,
-  size: 40,
-)</pre>
-        </div>
-        <div class="callout callout--info"><svg class="ico"><use href="#i-search"/></svg><div>Find any icon name at <span class="path">fonts.google.com/icons</span>, or type <code>Icons.</code> in VS Code.</div></div>
-      </div>
-      <div class="icon-grid stagger">
-        <div class="icon-card" style="--ic:#E53935;"><svg class="ico"><use href="#i-heart"/></svg><code>Icons.favorite</code></div>
-        <div class="icon-card"><svg class="ico"><use href="#i-home"/></svg><code>Icons.home</code></div>
-        <div class="icon-card"><svg class="ico"><use href="#i-search"/></svg><code>Icons.search</code></div>
-        <div class="icon-card"><svg class="ico"><use href="#i-user"/></svg><code>Icons.person</code></div>
-        <div class="icon-card"><svg class="ico"><use href="#i-phone"/></svg><code>Icons.phone</code></div>
-        <div class="icon-card"><svg class="ico"><use href="#i-mail"/></svg><code>Icons.email</code></div>
-        <div class="icon-card"><svg class="ico"><use href="#i-map-pin"/></svg><code>Icons.location_on</code></div>
-        <div class="icon-card" style="--ic:#F59E0B;"><svg class="ico"><use href="#i-star"/></svg><code>Icons.star</code></div>
-      </div>
-    </div>
-    <footer class="foot"><span>Mobile App Development · Lecture 06</span><span class="num"></span></footer>
-  </div></div>
-  <aside class="notes"><p>Icons come with Flutter: no download needed (that's what <code>uses-material-design: true</code> in pubspec.yaml is for). Icons are like text: they have a color and a size.</p></aside>
-</section>
-
-<!-- 04 · Image.network -->
-<section class="slide">
-  <div class="canvas"><div class="frame">
-    <header class="head">
-      <p class="kicker">Widget 2 · Image.network</p>
-      <h2 class="title">Show a picture from the internet</h2>
-    </header>
-    <div class="body" style="grid-template-columns: 1.15fr .9fr auto; gap: 2cqw; align-items: start;">
-      <div class="term code code--lg">
-        <div class="term__bar"><i></i><i></i><i></i><span>lib/main.dart</span></div>
-<pre class="hl" data-hl="2">Image.network(
-  'https://picsum.photos/400/300',
-  width: 300,
-  height: 200,
+<pre class="hl" data-groups="2:g1;3-4:g2;5:g3">Image.network(
+  'https://cdn.myanimelist.net/images/characters/5/186355.jpg',
+  width: 225,
+  height: 350,
   fit: BoxFit.cover,
 )</pre>
-      </div>
-      <div class="explain stagger">
-        <div class="defs">
-          <div class="def"><code>'https://…'</code><span>The picture's address (URL)</span></div>
-          <div class="def"><code>width / height</code><span>The size on the screen</span></div>
-          <div class="def"><code>fit:</code><span>How the picture fills the space</span></div>
         </div>
-        <div class="callout callout--warn"><svg class="ico"><use href="#i-wifi"/></svg><div>Needs <b>internet</b>. No internet = no picture.</div></div>
-      </div>
-      <div class="ph" style="--pw:13cqw;">
-        <div class="ph__scr"><div class="ph__island"></div>
-          <div class="appbar" style="--ab:#2196F3; --abf:#fff;">Network image</div>
-          <div class="pbody"><div class="scenic" style="width:100%; height:9em; border-radius:.3em;"></div></div>
+        <div class="legend-groups legend-row stagger">
+          <div class="lg" style="--c:#13B9FD;"><b>The URL</b><span>The picture's address on the internet</span></div>
+          <div class="lg" style="--c:#FFC857;"><b>width / height</b><span>Its size on the screen</span></div>
+          <div class="lg" style="--c:#4ADE80;"><b>fit</b><span>How it fills the space (slide 7)</span></div>
         </div>
+        <div class="callout callout--info"><svg class="ico"><use href="#i-mouse"/></svg><div>Get a URL: right-click any picture on the web → <b>Copy image address</b>. It should end in <b>.jpg</b> or <b>.png</b>.</div></div>
+      </div>
+      <div class="center-stack">
+        <div class="ph" style="--pw:14cqw;">
+          <div class="ph__scr"><div class="ph__island"></div>
+            <div class="appbar" style="--ab:#2D2A3E; --abf:#fff;">Chrollo</div>
+            <div class="col" style="align-items:center;">
+              <div class="net" style="width:11em; height:17.1em;">
+                <img src="https://cdn.myanimelist.net/images/characters/5/186355.jpg" alt="Chrollo Lucilfer" referrerpolicy="no-referrer">
+                <span class="net__spin"></span>
+              </div>
+              <div class="m-title" style="font-size:1.1em;">Chrollo Lucilfer</div>
+            </div>
+          </div>
+        </div>
+        <span class="badge badge--warm wifi-pulse"><svg class="ico"><use href="#i-wifi"/></svg>Needs internet</span>
       </div>
     </div>
     <footer class="foot"><span>Mobile App Development · Lecture 06</span><span class="num"></span></footer>
   </div></div>
-  <aside class="notes"><p>picsum.photos gives a random free photo, which is handy for testing. Right-click any image on the web → "Copy image address" to get a URL.</p></aside>
+  <aside class="notes"><p>Watch the phone: first it is empty while the picture downloads, then the picture appears. That's exactly what happens on a real phone with slow internet.</p><p>No internet = no picture. That's why we also need assets.</p></aside>
 </section>
 
-<!-- 05 · Assets step 1 -->
+<!-- 04 · Assets step 1 -->
 <section class="slide">
   <div class="canvas"><div class="frame">
     <header class="head">
-      <p class="kicker">Assets · Step 1 of 3</p>
+      <p class="kicker">Way 2 · Assets · Step 1 of 3</p>
       <h2 class="title">Make an <code>assets</code> folder</h2>
-      <p class="lead"><b>Assets</b> are files that ship <b>inside</b> your app: pictures, icons, fonts. They work without internet.</p>
+      <p class="lead"><b>Assets</b> are files that ship <b>inside</b> your app: pictures, SVGs, fonts. They work without internet.</p>
     </header>
-    <div class="body inside">
-      <div class="card tree stagger">
+    <div class="body inside" style="align-items:start;">
+      <div class="card tree tree--wide stagger">
         <div class="row"><span><span class="d">my_first_app/</span></span><span></span></div>
         <div class="row is-star"><span><span class="g">├─ </span><span class="d">assets/</span></span><span class="note">★ new folder</span></div>
         <div class="row is-star"><span><span class="g">│  └─ </span><span class="d">images/</span></span><span class="note">★ new folder</span></div>
-        <div class="row"><span><span class="g">│     ├─ </span><span class="f">logo.png</span></span><span class="note">your pictures</span></div>
-        <div class="row"><span><span class="g">│     └─ </span><span class="f">me.jpg</span></span><span class="note"></span></div>
+        <div class="row"><span><span class="g">│     ├─ </span><span class="f">chrollo_book.jpg</span></span><span class="note">the 3 pictures</span></div>
+        <div class="row"><span><span class="g">│     ├─ </span><span class="f">chrollo_portrait.jpg</span></span><span class="note"></span></div>
+        <div class="row"><span><span class="g">│     └─ </span><span class="f">chrollo_battle.jpg</span></span><span class="note"></span></div>
         <div class="row"><span><span class="g">├─ </span><span class="d">lib/</span></span><span class="note"></span></div>
         <div class="row"><span><span class="g">└─ </span><span class="f">pubspec.yaml</span></span><span class="note">next step</span></div>
       </div>
-      <div class="facts stagger">
+      <div class="facts">
         <div class="card fact"><div class="itile"><svg class="ico"><use href="#i-folder"/></svg></div><div><h3>Right-click the project</h3><p>In VS Code: right-click the project name → <b>New Folder</b> → <b>assets</b>, then <b>images</b> inside it.</p></div></div>
-        <div class="card fact"><div class="itile"><svg class="ico"><use href="#i-image"/></svg></div><div><h3>Drag your pictures in</h3><p>Use simple names: lowercase, no spaces. <b>me.jpg</b> ✓ &nbsp; <b>My Photo (1).JPG</b> ✗</p></div></div>
+        <div class="card fact"><div class="itile"><svg class="ico"><use href="#i-image"/></svg></div><div><h3>Drag the pictures in</h3><p>Simple names: lowercase, no spaces.<br><b>chrollo_book.jpg</b> ✓ &nbsp;&nbsp; <b>Chrollo Book (1).JPG</b> ✗</p></div></div>
+        <div class="drop">
+          <div class="drop__pic" style="--i:0;"><img src="https://cdn.myanimelist.net/images/characters/15/582919.jpg" alt="" referrerpolicy="no-referrer"></div>
+          <div class="drop__pic" style="--i:1;"><img src="https://cdn.myanimelist.net/images/characters/2/502151.jpg" alt="" referrerpolicy="no-referrer"></div>
+          <div class="drop__pic" style="--i:2;"><img src="https://cdn.myanimelist.net/images/characters/8/492868.jpg" alt="" referrerpolicy="no-referrer"></div>
+          <div class="drop__folder"><svg class="ico"><use href="#i-folder"/></svg><span>assets/images/</span></div>
+        </div>
       </div>
     </div>
     <footer class="foot"><span>Mobile App Development · Lecture 06</span><span class="num"></span></footer>
   </div></div>
-  <aside class="notes"><p>The assets folder goes in the project root, next to lib, not inside lib.</p></aside>
+  <aside class="notes"><p>The assets folder goes in the project root, next to lib, <b>not inside lib</b>. The three pictures are in the lecture-06-chrollo folder we shared.</p></aside>
 </section>
 
-<!-- 06 · Assets step 2 -->
+<!-- 05 · Assets step 2 -->
 <section class="slide">
   <div class="canvas"><div class="frame">
     <header class="head">
@@ -233,7 +240,7 @@
       <h2 class="title">Tell Flutter in <code>pubspec.yaml</code></h2>
     </header>
     <div class="body walk">
-      <div class="term code code--lg">
+      <div class="term code code--lg pulse-hl">
         <div class="term__bar"><i></i><i></i><i></i><span>pubspec.yaml</span></div>
 <pre class="hl" data-lang="yaml" data-hl="3-4">flutter:
   uses-material-design: true
@@ -243,201 +250,341 @@
       <div class="explain stagger">
         <div class="defs">
           <div class="def"><code>assets:</code><span>The list of asset folders or files</span></div>
-          <div class="def"><code>- assets/images/</code><span>Everything in this folder. Don't forget the <b>/</b> at the end!</span></div>
+          <div class="def"><code>- assets/images/</code><span>Every file in this folder. Don't forget the <b>/</b> at the end!</span></div>
         </div>
-        <div class="callout callout--warn"><svg class="ico"><use href="#i-alert"/></svg><div><b>Spaces matter!</b> <code>assets:</code> has 2 spaces, <code>- assets/…</code> has 4.</div></div>
+        <div class="callout callout--warn"><svg class="ico"><use href="#i-alert"/></svg><div><b>Spaces matter!</b> <code>assets:</code> has 2 spaces, <code>- assets/…</code> has 4. Never use Tab.</div></div>
         <div class="callout callout--info"><svg class="ico"><use href="#i-check-circle"/></svg><div>Save the file. VS Code runs <code>flutter pub get</code> for you.</div></div>
       </div>
     </div>
     <footer class="foot"><span>Mobile App Development · Lecture 06</span><span class="num"></span></footer>
   </div></div>
-  <aside class="notes"><p>In the default pubspec.yaml there's a commented-out "assets:" example. Students can uncomment it, but they must fix the indentation.</p></aside>
+  <aside class="notes"><p>In the default pubspec.yaml there's a commented-out "assets:" example. Students can uncomment it, but they must fix the spaces.</p></aside>
 </section>
 
-<!-- 07 · Assets step 3 -->
+<!-- 06 · Assets step 3 -->
 <section class="slide">
   <div class="canvas"><div class="frame">
     <header class="head">
       <p class="kicker">Assets · Step 3 of 3</p>
       <h2 class="title">Show it with <code>Image.asset</code></h2>
     </header>
-    <div class="body" style="grid-template-columns: 1.15fr .9fr auto; gap: 2cqw; align-items: start;">
+    <div class="body" style="grid-template-columns: 1.15fr .85fr auto; gap: 2.4cqw; align-items: start;">
       <div class="term code code--lg">
         <div class="term__bar"><i></i><i></i><i></i><span>lib/main.dart</span></div>
 <pre class="hl" data-hl="2">Image.asset(
-  'assets/images/logo.png',
+  'assets/images/chrollo_portrait.jpg',
   width: 150,
 )</pre>
       </div>
       <div class="explain stagger">
-        <div class="say"><p>The path must be <b>exactly</b> the same as the file: folders, name and extension.</p></div>
-        <div class="callout callout--warn"><svg class="ico"><use href="#i-zap"/></svg><div>Added a <b>new</b> picture? Stop the app and run again. Hot reload is not enough.</div></div>
+        <div class="say"><p>The path must be <b>exactly</b> the same as the file: folders, name and <b>.jpg</b>.</p></div>
+        <div class="callout callout--info"><svg class="ico"><use href="#i-copy"/></svg><div>No typos: right-click the file in VS Code → <b>Copy Relative Path</b>. On Windows, change <b>\</b> to <b>/</b>.</div></div>
+        <div class="callout callout--warn"><svg class="ico"><use href="#i-zap"/></svg><div>Added a <b>new</b> picture? Stop the app and run it again. Hot reload is not enough.</div></div>
       </div>
       <div class="ph" style="--pw:13cqw;">
         <div class="ph__scr"><div class="ph__island"></div>
-          <div class="appbar" style="--ab:#2196F3; --abf:#fff;">Asset image</div>
-          <div class="pbody"><svg class="logo" style="width:5.5em; height:7em;"><use href="#flutter-logo"/></svg></div>
+          <div class="appbar" style="--ab:#2D2A3E; --abf:#fff;">Asset image</div>
+          <div class="pbody" style="place-items:start center; padding-top:1.4em;"><img class="asset-pop" src="https://cdn.myanimelist.net/images/characters/2/502151.jpg" alt="Chrollo" referrerpolicy="no-referrer" style="width:10em;"></div>
         </div>
       </div>
     </div>
     <footer class="foot"><span>Mobile App Development · Lecture 06</span><span class="num"></span></footer>
   </div></div>
-  <aside class="notes"><p>Copy the path straight from VS Code (right-click the file → Copy Relative Path) to avoid typos. On Windows, change the backslashes to forward slashes.</p></aside>
+  <aside class="notes"><p>Ask the class: turn off the Wi-Fi and run again. The asset picture still shows, the network one doesn't.</p><p>Then let them change the path to chrollo_book.jpg and chrollo_battle.jpg.</p></aside>
 </section>
 
-<!-- 08 · BoxFit -->
+<!-- 07 · BoxFit -->
 <section class="slide">
   <div class="canvas"><div class="frame">
     <header class="head">
       <p class="kicker">Image tip</p>
       <h2 class="title"><code>fit:</code> how a picture fills its box</h2>
-      <p class="lead">Same picture, same square box, three different <code>BoxFit</code> values:</p>
+      <p class="lead">Same Chrollo, same square box, three different <code>BoxFit</code> values:</p>
     </header>
     <div class="body fit-grid stagger">
-      <div class="fit"><div class="fit__frame fit__img" style="background-size:cover;"></div><code>BoxFit.cover</code><span class="small muted">Fills the box, cuts the edges</span></div>
-      <div class="fit"><div class="fit__frame fit__img" style="background-size:contain;"></div><code>BoxFit.contain</code><span class="small muted">Shows all of it, leaves space</span></div>
-      <div class="fit"><div class="fit__frame fit__img" style="background-size:100% 100%;"></div><code>BoxFit.fill</code><span class="small muted">Stretches it (can look wrong!)</span></div>
+      <div class="fit"><div class="fit__frame fitc"><img src="https://cdn.myanimelist.net/images/characters/5/186355.jpg" alt="" referrerpolicy="no-referrer" style="object-fit:cover;"></div><code>BoxFit.cover</code><span class="small muted">Fills the box, cuts the edges</span></div>
+      <div class="fit"><div class="fit__frame fitc"><img src="https://cdn.myanimelist.net/images/characters/5/186355.jpg" alt="" referrerpolicy="no-referrer" style="object-fit:contain;"></div><code>BoxFit.contain</code><span class="small muted">Shows all of it, leaves space</span></div>
+      <div class="fit"><div class="fit__frame fitc"><img src="https://cdn.myanimelist.net/images/characters/5/186355.jpg" alt="" referrerpolicy="no-referrer" style="object-fit:fill;"></div><code>BoxFit.fill</code><span class="small muted">Stretches it (Chrollo looks wrong!)</span></div>
     </div>
     <footer class="foot"><span>Mobile App Development · Lecture 06</span><span class="num"></span></footer>
   </div></div>
-  <aside class="notes"><p>BoxFit.cover is the one used most for photos. contain is good for logos.</p></aside>
+  <aside class="notes"><p>BoxFit.cover is the one used most for photos. contain is good for logos. fill almost always looks bad: look at Chrollo's face.</p></aside>
 </section>
 
-<!-- 09 · Round images -->
+<!-- 08 · What is SVG -->
 <section class="slide">
   <div class="canvas"><div class="frame">
     <header class="head">
-      <p class="kicker">Widget 3 · Round images</p>
-      <h2 class="title"><code>CircleAvatar</code> and <code>ClipRRect</code></h2>
+      <p class="kicker">Way 3 · SVG</p>
+      <h2 class="title">What is an SVG?</h2>
+      <p class="lead">JPG and PNG pictures are made of tiny squares (<b>pixels</b>). An <b>SVG</b> is a drawing made of shapes, saved as text, so it stays sharp at any size.</p>
     </header>
-    <div class="body row2" style="align-items:start;">
-      <article class="card" style="display:grid; gap:1.1cqw;">
-        <div style="display:flex; gap:1.4cqw; align-items:center;"><div class="scenic" style="width:6cqw; height:6cqw; border-radius:50%;"></div><h3>CircleAvatar<br><span class="small muted">a round photo</span></h3></div>
-        <div class="term code code--nonum"><pre class="hl">CircleAvatar(
-  radius: 50,
-  backgroundImage: AssetImage('assets/images/me.jpg'),
-)</pre></div>
+    <div class="body svg-what stagger">
+      <article class="card zcard">
+        <div class="lens"><div class="lens__in"><img src="https://cdn.myanimelist.net/images/characters/5/186355.jpg" alt="" referrerpolicy="no-referrer"><img class="px" src="https://cdn.myanimelist.net/r/42x62/images/characters/5/186355.jpg" alt="" referrerpolicy="no-referrer"></div><span class="lens__x">zoom × 3</span></div>
+        <h3>JPG / PNG</h3>
+        <p>Zoom in → you see the <b>squares</b>. Best for photos.</p>
       </article>
-      <article class="card" style="display:grid; gap:1.1cqw;">
-        <div style="display:flex; gap:1.4cqw; align-items:center;"><div class="scenic" style="width:9cqw; height:6cqw; border-radius:1cqw;"></div><h3>ClipRRect<br><span class="small muted">rounded corners</span></h3></div>
-        <div class="term code code--nonum"><pre class="hl">ClipRRect(
-  borderRadius: BorderRadius.circular(16),
-  child: Image.asset('assets/images/me.jpg'),
-)</pre></div>
+      <article class="card zcard">
+        <div class="lens lens--svg"><div class="lens__in"><span class="spider-host" data-spider></span></div><span class="lens__x">zoom × 3</span></div>
+        <h3>SVG</h3>
+        <p>Zoom in → still <b>sharp</b>. Best for logos, icons, drawings.</p>
       </article>
-      <div class="callout callout--info" style="grid-column:1 / -1;"><svg class="ico"><use href="#i-bulb"/></svg><div>Inside CircleAvatar use <code>AssetImage(…)</code> or <code>NetworkImage(…)</code>, not <code>Image.asset</code>.</div></div>
+      <article class="card svgsrc">
+        <h3><svg class="ico"><use href="#i-file"/></svg> phantom_spider.svg</h3>
+        <div class="term"><pre class="xml"><span class="t-c">&lt;!-- an SVG file is just text --&gt;</span>
+&lt;<span class="tk-kw">svg</span> <span class="tk-prop">viewBox</span>=<span class="tk-str">"0 0 240 230"</span>&gt;
+  &lt;<span class="tk-kw">circle</span> <span class="tk-prop">cx</span>=<span class="tk-str">"120"</span> <span class="tk-prop">cy</span>=<span class="tk-str">"94"</span> <span class="tk-prop">r</span>=<span class="tk-str">"15"</span>/&gt;
+  &lt;<span class="tk-kw">ellipse</span> <span class="tk-prop">rx</span>=<span class="tk-str">"24"</span> <span class="tk-prop">ry</span>=<span class="tk-str">"33"</span> …/&gt;
+  &lt;<span class="tk-kw">path</span> <span class="tk-prop">d</span>=<span class="tk-str">"M112 104 L115 58…"</span>/&gt;
+&lt;/<span class="tk-kw">svg</span>&gt;</pre></div>
+        <p class="small muted">circle = head, ellipse = body, path = one leg. The phone draws the shapes again at any size.</p>
+      </article>
     </div>
     <footer class="foot"><span>Mobile App Development · Lecture 06</span><span class="num"></span></footer>
   </div></div>
-  <aside class="notes"><p>ClipRRect = "Clip Rounded Rectangle". It cuts its child into a rounded shape. CircleAvatar is perfect for profile pictures.</p></aside>
+  <aside class="notes"><p>SVG = Scalable Vector Graphics. Open phantom_spider.svg in VS Code to show it really is text. Then open it in the browser: the same text becomes the spider.</p><p>This spider is the emblem of the Phantom Troupe, the group Chrollo leads.</p></aside>
 </section>
 
-<!-- 10 · Build it -->
+<!-- 09 · Install flutter_svg -->
 <section class="slide">
   <div class="canvas"><div class="frame">
     <header class="head">
-      <p class="kicker">Build it together</p>
-      <h2 class="title">A profile header</h2>
+      <p class="kicker">SVG · Step 1 of 3</p>
+      <h2 class="title">Add the <code>flutter_svg</code> package</h2>
+      <p class="lead">Flutter can't show SVG files on its own. A <b>package</b> is ready-made code that other developers share on <span class="path">pub.dev</span>.</p>
     </header>
-    <div class="body" style="grid-template-columns: 1.25fr .75fr; gap: 2.4cqw; align-items: start;">
-      <div class="term code code--sm">
-        <div class="term__bar"><i></i><i></i><i></i><span>lib/main.dart</span><span class="grow"></span><span>inside Scaffold</span></div>
-<pre class="hl">body: const Padding(
-  padding: EdgeInsets.all(24),
-  child: Column(
-    children: [
-      CircleAvatar(
-        radius: 50,
-        backgroundImage: AssetImage('assets/images/me.jpg'),
-      ),
-      SizedBox(height: 12),
-      Text('Ahmed Ali', style: TextStyle(fontSize: 22)),
-      SizedBox(height: 12),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(Icons.phone, color: Colors.blue),
-          SizedBox(width: 24),
-          Icon(Icons.email, color: Colors.blue),
-          SizedBox(width: 24),
-          Icon(Icons.location_on, color: Colors.blue),
-        ],
-      ),
-    ],
-  ),
-),</pre>
+    <div class="body" style="grid-template-columns: .82fr 1.18fr; gap: 2.2cqw; align-items: start;">
+      <div class="side stagger">
+        <div class="card pkg">
+          <div class="pkg__top"><svg class="ico"><use href="#i-package"/></svg><b>flutter_svg</b><span class="badge">2.3.0</span></div>
+          <p>Draws SVG files in Flutter apps. Works on Android, iOS, web and desktop.</p>
+          <span class="path">pub.dev/packages/flutter_svg</span>
+        </div>
+        <div class="callout callout--info"><svg class="ico"><use href="#i-bulb"/></svg><div>This is our <b>first package</b>! Later we'll add more the same way.</div></div>
       </div>
-      <div class="center-stack">
-        <div class="ph" style="--pw:13.5cqw;">
-          <div class="ph__scr"><div class="ph__island"></div>
-            <div class="appbar" style="--ab:#2196F3; --abf:#fff;">Profile</div>
-            <div class="col" style="align-items:center; padding-top:1.6em;">
-              <div class="m-avatar scenic"></div>
-              <div class="m-title" style="font-size:1.25em;">Ahmed Ali</div>
-              <div class="rowx" style="gap:1.4em; --ic:#2196F3;"><svg class="ico ico-m"><use href="#i-phone"/></svg><svg class="ico ico-m"><use href="#i-mail"/></svg><svg class="ico ico-m"><use href="#i-map-pin"/></svg></div>
-            </div>
-          </div>
+      <div class="side">
+        <div class="term term--type">
+          <div class="term__bar"><i></i><i></i><i></i><span>Terminal (in your project folder)</span></div>
+          <pre><span class="t-p">PS&gt;</span> <span class="typed" style="--n:27;">flutter pub add flutter_svg</span><span class="cursor"></span>
+<span class="out" style="--t:2.3s;"><span class="t-dim">Resolving dependencies...</span></span>
+<span class="out" style="--t:2.8s;"><span class="t-ok">+ flutter_svg 2.3.0</span></span>
+<span class="out" style="--t:3.3s;"><span class="t-c"># done! it was added to pubspec.yaml ↓</span></span></pre>
+        </div>
+        <div class="term code code--lg reveal-late">
+          <div class="term__bar"><i></i><i></i><i></i><span>pubspec.yaml</span></div>
+<pre class="hl" data-lang="yaml" data-hl="5">dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  flutter_svg: ^2.3.0</pre>
         </div>
       </div>
     </div>
     <footer class="foot"><span>Mobile App Development · Lecture 06</span><span class="num"></span></footer>
   </div></div>
-  <aside class="notes"><p>Everything is constant here, so one <code>const</code> in front of Padding is enough. Students replace me.jpg with their own photo.</p></aside>
+  <aside class="notes"><p>Open the terminal in VS Code (Ctrl + `) inside the project folder and type the command. Then open pubspec.yaml and show the new line under dependencies.</p><p>Show pub.dev in the browser: the README has examples, the version, and which platforms it supports.</p></aside>
 </section>
 
-<!-- 11 · SVG -->
+<!-- 10 · Add the SVG file -->
 <section class="slide">
   <div class="canvas"><div class="frame">
     <header class="head">
-      <p class="kicker">Bonus · SVG images</p>
-      <h2 class="title">SVG pictures need a <b>package</b></h2>
-      <p class="lead">SVG images stay sharp at any size. Flutter can't show them alone, so we add <b>flutter_svg</b>.</p>
+      <p class="kicker">SVG · Step 2 of 3</p>
+      <h2 class="title">Put the SVG file in your assets</h2>
     </header>
-    <div class="body" style="grid-template-columns: 1fr 1fr; gap: 2cqw; align-items:start;">
+    <div class="body inside">
       <div class="side">
-        <span class="step-tag">1 · Add the package</span>
-        <div class="term"><div class="term__bar"><i></i><i></i><i></i><span>Terminal</span></div><pre><span class="t-p">PS&gt;</span> flutter pub add flutter_svg</pre></div>
-        <span class="step-tag">2 · Import it</span>
-        <div class="term code code--nonum"><pre class="hl">import 'package:flutter_svg/flutter_svg.dart';</pre></div>
+        <div class="card tree tree--wide stagger">
+          <div class="row"><span><span class="d">my_first_app/</span></span><span></span></div>
+          <div class="row"><span><span class="g">├─ </span><span class="d">assets/</span></span><span class="note"></span></div>
+          <div class="row"><span><span class="g">│  ├─ </span><span class="d">images/</span></span><span class="note">the 3 Chrollo .jpg</span></div>
+          <div class="row is-star"><span><span class="g">│  └─ </span><span class="d">svg/</span></span><span class="note">★ new folder</span></div>
+          <div class="row is-star"><span><span class="g">│     └─ </span><span class="f">phantom_spider.svg</span></span><span class="note">★ the spider</span></div>
+          <div class="row"><span><span class="g">├─ </span><span class="d">lib/</span></span><span class="note"></span></div>
+          <div class="row"><span><span class="g">└─ </span><span class="f">pubspec.yaml</span></span><span class="note">add the folder ↓</span></div>
+        </div>
       </div>
       <div class="side">
-        <span class="step-tag">3 · Use it</span>
-        <div class="term code code--lg code--nonum"><pre class="hl">SvgPicture.asset(
-  'assets/images/logo.svg',
-  width: 80,
-)</pre></div>
-        <div class="callout callout--info"><svg class="ico"><use href="#i-package"/></svg><div>A <b>package</b> is ready-made code from <span class="path">pub.dev</span>. This is our first one!</div></div>
+        <div class="term code code--lg">
+          <div class="term__bar"><i></i><i></i><i></i><span>pubspec.yaml</span></div>
+<pre class="hl" data-lang="yaml" data-hl="5">flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/svg/</pre>
+        </div>
+        <div class="callout callout--info"><svg class="ico"><use href="#i-download"/></svg><div>Get the spider: <span class="path">lecture-06-chrollo/assets/svg/</span>. More free SVGs: <span class="path">svgrepo.com</span></div></div>
+        <div class="callout callout--warn"><svg class="ico"><use href="#i-alert"/></svg><div>An <b>SVG</b> file is shown with <b>SvgPicture</b>, never with <code>Image.asset</code>.</div></div>
       </div>
     </div>
     <footer class="foot"><span>Mobile App Development · Lecture 06</span><span class="num"></span></footer>
   </div></div>
-  <aside class="notes"><p>After <code>flutter pub add</code>, open pubspec.yaml and show the new line under dependencies. Free SVG icons: svgrepo.com, undraw.co.</p></aside>
+  <aside class="notes"><p>Same idea as pictures: a folder, then one line in pubspec.yaml. Spaces again: 4 spaces before the dash.</p><p>Download link for students: monther-bug.github.io/flutter-lecture-06/assets/svg/phantom_spider.svg</p></aside>
 </section>
 
-<!-- 12 · Mistakes -->
+<!-- 11 · SvgPicture.asset -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">SVG · Step 3 of 3</p>
+      <h2 class="title">Import it, then use <code>SvgPicture</code></h2>
+    </header>
+    <div class="body" style="grid-template-columns: 1.2fr .8fr auto; gap: 2.2cqw; align-items: start;">
+      <div class="term code code--lg">
+        <div class="term__bar"><i></i><i></i><i></i><span>lib/main.dart</span></div>
+<pre class="hl" data-groups="2:g2;5-8:g1">import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+// … inside build():
+SvgPicture.asset(
+  'assets/svg/phantom_spider.svg',
+  width: 150,
+)</pre>
+      </div>
+      <div class="legend-groups stagger">
+        <div class="lg" style="--c:#FFC857;"><b>The import</b><span>Opens the package so this file can use it. Put it at the top.</span></div>
+        <div class="lg" style="--c:#13B9FD;"><b>SvgPicture.asset</b><span>Like <code>Image.asset</code>, but for SVG files.</span></div>
+        <div class="lg" style="--c:#4ADE80;"><b>width: 150</b><span>Any size you want. It stays sharp.</span></div>
+      </div>
+      <div class="ph" style="--pw:13cqw;">
+        <div class="ph__scr"><div class="ph__island"></div>
+          <div class="appbar" style="--ab:#2D2A3E; --abf:#fff;">Phantom Troupe</div>
+          <div class="pbody"><span class="spider-host spider--draw" data-spider style="width:10.5em;"></span></div>
+        </div>
+      </div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 06</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes"><p>Forgetting the import is the number one SVG error: "Undefined name 'SvgPicture'". VS Code can add it for you: click on SvgPicture → Quick Fix (Ctrl + .) → Import library.</p></aside>
+</section>
+
+<!-- 12 · network + colorFilter -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">SVG · Two more tricks</p>
+      <h2 class="title">SVG from the internet, in any color</h2>
+    </header>
+    <div class="body tricks stagger">
+      <article class="card trick">
+        <div class="trick__code">
+          <span class="step-tag">From the internet</span>
+          <div class="term code code--nonum"><pre class="hl" data-groups="2:g1">SvgPicture.network(
+  'https://monther-bug.github.io/flutter-lecture-06/assets/svg/phantom_spider.svg',
+  width: 80,
+)</pre></div>
+        </div>
+        <div class="trick__demo"><span class="spider-host" data-spider style="width:7cqw;"></span><span class="small muted">Needs internet, like <code>Image.network</code></span></div>
+      </article>
+      <article class="card trick">
+        <div class="trick__code">
+          <span class="step-tag">Change its color</span>
+          <div class="term code code--nonum"><pre class="hl" data-groups="4:g4">SvgPicture.asset(
+  'assets/svg/phantom_spider.svg',
+  width: 80,
+  colorFilter: const ColorFilter.mode(Colors.deepPurple, BlendMode.srcIn),
+)</pre></div>
+        </div>
+        <div class="trick__demo">
+          <div class="swatches">
+            <span class="spider-host solid" data-spider style="color:#673AB7;"></span>
+            <span class="spider-host solid" data-spider style="color:#F44336;"></span>
+            <span class="spider-host solid" data-spider style="color:#009688;"></span>
+            <span class="spider-host solid cycle" data-spider></span>
+          </div>
+          <span class="small muted"><code>BlendMode.srcIn</code> paints the whole drawing in one color</span>
+        </div>
+      </article>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 06</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes"><p>The URL is our own spider, hosted with these slides on GitHub Pages.</p><p>Old videos use <code>color: Colors.red</code> on SvgPicture. That is the old way (deprecated); new code uses <code>colorFilter</code>.</p></aside>
+</section>
+
+<!-- 13 · Build it -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Build it together</p>
+      <h2 class="title">A Chrollo character card</h2>
+    </header>
+    <div class="body" style="grid-template-columns: 1.3fr .7fr; gap: 2.4cqw; align-items: start;">
+      <div class="term code code--sm">
+        <div class="term__bar"><i></i><i></i><i></i><span>lib/main.dart</span><span class="grow"></span><span>inside Scaffold</span></div>
+<pre class="hl" data-groups="3:g4;5-8:g1;10-16:g3">body: Column(
+  children: [
+    SvgPicture.asset('assets/svg/phantom_spider.svg', width: 60),
+    const Text('Chrollo Lucilfer', style: TextStyle(fontSize: 24)),
+    Image.network(
+      'https://cdn.myanimelist.net/images/characters/5/186355.jpg',
+      height: 220,
+    ),
+    const SizedBox(height: 12),
+    Row(
+      children: [
+        Expanded(child: Image.asset('assets/images/chrollo_book.jpg')),
+        Expanded(child: Image.asset('assets/images/chrollo_portrait.jpg')),
+        Expanded(child: Image.asset('assets/images/chrollo_battle.jpg')),
+      ],
+    ),
+  ],
+),</pre>
+      </div>
+      <div class="center-stack">
+        <div class="ph" style="--pw:15cqw;">
+          <div class="ph__scr"><div class="ph__island"></div>
+            <div class="appbar" style="--ab:#2D2A3E; --abf:#fff;">Phantom Troupe</div>
+            <div class="card-app stagger">
+              <span class="spider-host" data-spider style="width:3.2em;"></span>
+              <div class="m-title" style="font-size:1.3em;">Chrollo Lucilfer</div>
+              <img src="https://cdn.myanimelist.net/images/characters/5/186355.jpg" alt="" referrerpolicy="no-referrer" style="height:11.5em;">
+              <div class="trio">
+                <img src="https://cdn.myanimelist.net/images/characters/15/582919.jpg" alt="" referrerpolicy="no-referrer">
+                <img src="https://cdn.myanimelist.net/images/characters/2/502151.jpg" alt="" referrerpolicy="no-referrer">
+                <img src="https://cdn.myanimelist.net/images/characters/8/492868.jpg" alt="" referrerpolicy="no-referrer">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="chips stagger" style="justify-content:center;">
+          <span class="chip"><i class="dot" style="--c:#C792EA;"></i>SVG</span>
+          <span class="chip"><i class="dot" style="--c:#13B9FD;"></i>network</span>
+          <span class="chip"><i class="dot" style="--c:#4ADE80;"></i>3 assets</span>
+        </div>
+      </div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 06</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes"><p>Don't forget the flutter_svg import at the top of the file. Each Expanded takes one third of the Row, so the three pictures share the width (lecture 5).</p><p>Ask: why is there no <code>const</code> in front of Column? (Image.network and SvgPicture can't be const.)</p></aside>
+</section>
+
+<!-- 14 · Mistakes -->
 <section class="slide">
   <div class="canvas"><div class="frame">
     <header class="head">
       <p class="kicker">Troubleshooting</p>
-      <h2 class="title">4 image mistakes (and the fix)</h2>
+      <h2 class="title">6 picture mistakes (and the fix)</h2>
     </header>
     <div class="body probs">
-      <table class="tbl tbl--probs">
+      <table class="tbl tbl--probs tbl--slide">
         <tbody>
-          <tr><td><span class="err">Unable to load asset: "assets/images/me.jpg"</span></td><td>Check the path and file name, and that the folder is listed in pubspec.yaml.</td></tr>
+          <tr><td><span class="err">Unable to load asset: "assets/images/chrollo_book.jpg"</span></td><td>Check the path and file name, and that the folder is listed in pubspec.yaml.</td></tr>
           <tr><td><span class="muted">New picture doesn't show up</span></td><td>Stop the app and run it again. New assets need a full restart.</td></tr>
-          <tr><td><span class="err">Error on line 12, column 4 … pubspec.yaml</span></td><td>Wrong spaces in pubspec.yaml. Use 2 and 4 spaces, never Tab.</td></tr>
+          <tr><td><span class="err">Error on line 64, column 5 … pubspec.yaml</span></td><td>Wrong spaces in pubspec.yaml. Use 2 and 4 spaces, never Tab.</td></tr>
+          <tr><td><span class="err">Undefined name 'SvgPicture'</span></td><td>Add <code>import 'package:flutter_svg/flutter_svg.dart';</code> at the top.</td></tr>
+          <tr><td><span class="err">Exception: Invalid image data</span></td><td>You used <code>Image.asset</code> on an .svg file. Use <code>SvgPicture.asset</code>.</td></tr>
           <tr><td><span class="err">SocketException: Failed host lookup</span></td><td>No internet, or a wrong URL in <code>Image.network</code>.</td></tr>
         </tbody>
       </table>
-      <div class="callout callout--info"><svg class="ico"><use href="#i-bulb"/></svg><div>Names are <b>case-sensitive</b>: <b>Me.JPG</b> and <b>me.jpg</b> are two different files.</div></div>
+      <div class="callout callout--info"><svg class="ico"><use href="#i-bulb"/></svg><div>Names are <b>case-sensitive</b>: <b>Chrollo.JPG</b> and <b>chrollo.jpg</b> are two different files.</div></div>
     </div>
     <footer class="foot"><span>Mobile App Development · Lecture 06</span><span class="num"></span></footer>
   </div></div>
-  <aside class="notes"><p>"Unable to load asset" is the number one image error. Go through the checklist with the class: folder, pubspec, exact name, restart.</p></aside>
+  <aside class="notes"><p>"Unable to load asset" is the number one picture error. Go through the checklist with the class: folder, pubspec, exact name, restart.</p></aside>
 </section>
 
-<!-- 13 · Practice -->
+<!-- 15 · Practice -->
 <section class="slide">
   <div class="canvas"><div class="frame">
     <header class="head">
@@ -448,24 +595,26 @@
       <article class="card">
         <h3>Practice</h3>
         <ul class="checklist stagger">
-          <li><span>Put <b>your photo</b> in a CircleAvatar</span></li>
-          <li><span>Add your name and 3 icons under it</span></li>
-          <li><span>Show a network picture with rounded corners</span></li>
+          <li><span>Show Chrollo from the internet with <code>Image.network</code></span></li>
+          <li><span>Add the 3 Chrollo pictures as assets and show them</span></li>
           <li><span>Try <code>BoxFit.cover</code>, <code>contain</code> and <code>fill</code></span></li>
+          <li><span>Install <code>flutter_svg</code> and show the spider</span></li>
+          <li><span>Paint the spider your favorite color with <code>colorFilter</code></span></li>
         </ul>
       </article>
       <div class="side">
-        <div class="videos">
+        <div class="videos stagger">
           <a class="video" href="https://www.youtube.com/watch?v=6TmpjwKX9AU" target="_blank" rel="noopener"><span class="yt"><svg class="ico"><use href="#i-play"/></svg></span><span>Image Asset · Widget of the Day #06</span><small>4:31</small></a>
-          <a class="video" href="https://www.youtube.com/watch?v=yxYntGhRzGM" target="_blank" rel="noopener"><span class="yt"><svg class="ico"><use href="#i-play"/></svg></span><span>Round Corners · Widget of the Day #05</span><small>2:46</small></a>
+          <a class="video" href="https://www.youtube.com/watch?v=1ujNbxNbZEc" target="_blank" rel="noopener"><span class="yt"><svg class="ico"><use href="#i-play"/></svg></span><span>Display SVG Images in Flutter</span><small>4:46</small></a>
+          <a class="video" href="https://www.youtube.com/watch?v=mTE5QR97jtc" target="_blank" rel="noopener"><span class="yt"><svg class="ico"><use href="#i-play"/></svg></span><span>How to load an SVG file in Flutter</span><small>2:31</small></a>
         </div>
         <div class="card next"><h4>Next lecture</h4><p>User input: TextField &amp; buttons</p></div>
-        <div class="qa__big grad-text" style="font-size:4.2cqw;">Questions?</div>
+        <div class="qa__big grad-text shine" style="font-size:4.2cqw;">Questions?</div>
       </div>
     </div>
     <footer class="foot"><span>Mobile App Development · Lecture 06</span><span class="num"></span></footer>
   </div></div>
-  <aside class="notes"><p>Project 1 can now include a profile photo. Remind students of the deadline.</p></aside>
+  <aside class="notes"><p>Project 1 can now include pictures and an SVG. Remind students of the deadline.</p></aside>
 </section>
 
 </main>
@@ -476,6 +625,11 @@
 </div>
 <div class="hint" aria-hidden="true"><kbd>←</kbd> <kbd>→</kbd> navigate · <kbd>F</kbd> fullscreen · <kbd>N</kbd> notes · <kbd>T</kbd> theme</div>
 
+<script>
+  // copy the spider drawing into every [data-spider] spot
+  const spider = document.getElementById('spider-tpl');
+  document.querySelectorAll('[data-spider]').forEach(el => el.append(spider.content.cloneNode(true)));
+</script>
 <script src="js/deck.js"></script>
 </body>
 </html>

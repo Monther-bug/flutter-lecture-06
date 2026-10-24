@@ -12,3 +12,6 @@ Open `index.html` in Chrome or Edge (double-click works, no server needed). Ligh
 | T | Light / dark theme |
 
 Jump to a slide with `#5` at the end of the URL. Print → Save as PDF gives one slide per page.
+
+`assets/svg/phantom_spider.svg` is the Phantom Troupe spider used in the SVG slides. It is served at
+https://monther-bug.github.io/flutter-lecture-06/assets/svg/phantom_spider.svg for the `SvgPicture.network` example.
